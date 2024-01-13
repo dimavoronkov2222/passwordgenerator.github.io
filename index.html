@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #password {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="password"></div>
+        <label for="length">Довжина пароля:</label>
+        <input type="number" id="length" min="1" max="128" value="12">
+        <label for="specials">Використовувати спеціальні символи:</label>
+        <input type="checkbox" id="specials">
+        <button onclick="generatePassword()">Генерувати пароль</button>
+    </div>
+
+    <script>
+        function generatePassword() {
+            var length = document.getElementById("length").value,
+                charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+                password = "";
+            if (document.getElementById("specials").checked) {
+                charset += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+            }
+            for (var i = 0, n = charset.length; i < length; ++i) {
+                password += charset.charAt(Math.floor(Math.random() * n));
+            }
+            document.getElementById("password").innerText = password;
+        }
+    </script>
+</body>
+</html>
